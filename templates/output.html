@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VAST</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="header-links">
+        <a href="index.html">Home</a>
+        <a href="#">Translate</a>
+        <a href="#">Settings</a>
+      </div>
+    </div>
+    <div class="content">
+      <div class="item">
+        <h3><b>Output</b></h3>
+        <p id="output-message">{{ output }}</p>
+        <button onclick="speakOutputMessage()">Speak Output</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let outputMessage = "{{ output }}";
+    let selectedLanguage = "{{ language }}";
+
+    function speakOutputMessage() {
+      if (selectedLanguage && outputMessage) {
+        const utterance = new SpeechSynthesisUtterance(outputMessage);
+        utterance.lang = selectedLanguage;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+  </script>
+</body>
+</html>

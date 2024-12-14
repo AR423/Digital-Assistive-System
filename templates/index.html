@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VAST</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="header-links">
+        <a href="index.html">Home</a>
+        <a href="#">Translate</a>
+        <a href="#">Settings</a>
+      </div>
+    </div>
+    <div class="content">
+      <div class="item">
+        <h3>Locations</h3>
+        <div class="image-container">
+          <button class="location-button" onclick="selectLocation('bank')">
+            <img src="{{ url_for('static', filename='bank.jpg') }}" alt="Bank">
+            <p>Bank</p>
+          </button>
+          <button class="location-button" onclick="selectLocation('supermarket')">
+            <img src="{{ url_for('static', filename='supermarket.jpg') }}" alt="Supermarket">
+            <p>Supermarket</p>
+          </button>
+          <button class="location-button" onclick="selectLocation('ticket_window')">
+            <img src="{{ url_for('static', filename='ticket.png') }}" alt="Train Ticket Window">
+            <p>Train Ticket Window</p>
+          </button>
+        </div>
+      </div>
+      <div class="item">
+        <h3><b>Voice Command</b></h3>
+        <p>Select Language: 
+            <div class="header-select">
+              <form action="/submit" method="post">
+                <select id="language-select" name="language">
+                  <option value="en">English</option>
+                  <option value="hi">Hindi</option>
+                  <option value="mr">Marathi</option>
+                  <option value="gu">Gujarati</option>
+                </select>
+                <!-- <button type="submit">Submit</button> -->
+              </form>
+              </div>
+        </p>
+        <button id="speech-button" onclick="toggleSpeechInput()">Tap to start speaking</button>
+      </div>
+      <div class="item">
+        <h3><b>Submit</b></h3>
+        <div class="transcript-container">
+          <p id="transcript"></p>
+        </div>
+        <p>Selected Language: <span id="selected-language">English</span></p>
+        <p>Selected Location: <span id="selected-location">N/A</span></p>
+        <form id="submit-form" action="/submit" method="post">
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
